@@ -87,10 +87,11 @@
         })();
     </script>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700">
     <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://unpkg.com/vis-network/styles/vis-network.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
@@ -119,20 +120,26 @@
                 <div class="mb-3"><label class="form-label fw-bold" for="jsonInput">1. الصق محتوى JSON</label><textarea class="form-control" dir="ltr" id="jsonInput" placeholder="[ ... ]" rows="8"></textarea></div>
                 <div class="text-center text-muted my-2 small"><span>أو</span></div>
                 <div class="mb-3"><label class="form-label fw-bold" for="fileInput">2. ارفع ملفًا</label><input type="file" accept="application/json,.json,.csv" class="form-control" id="fileInput"></div>
-                <div class="d-grid mt-4 gap-2"><button class="btn btn-primary btn-lg disabled disabled" id="renderBtn" disabled=""><span class="spinner-border spinner-border-sm d-none me-2" role="status" aria-hidden="true"></span><span class="btn-text"><i class="bi bi-play-fill ms-2" aria-hidden="true"></i> عرض وتحليل البنية</span></button><button class="btn btn-outline-secondary" id="loadSampleDataBtn" type="button"><i class="bi bi-magic ms-2"></i>تجربة ببيانات عينة</button></div>
+                <div class="d-grid mt-4 gap-2"><button class="btn btn-primary btn-lg disabled" id="renderBtn" disabled><span class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span><span class="btn-text"><i class="bi bi-play-fill ms-2" aria-hidden="true"></i> عرض وتحليل البنية</span> </button><button class="btn btn-outline-secondary" id="loadSampleDataBtn" type="button"><i class="bi bi-magic ms-2"></i>تجربة ببيانات عينة</button></div>
                 <hr class="my-4">
                 <h3 class="h5">طبقات التحليل</h3>
                 <div class="btn-group w-100 mb-2" role="group" aria-label="View Modes" id="view-modes-group"><button class="btn btn-secondary active" type="button" data-view-mode="linkEquity" title="عرض الصفحات حسب حالتها (عادية، يتيمة، noindex)"><i class="bi bi-link-45deg ms-2" aria-hidden="true"></i>قوة الروابط</button><button class="btn btn-secondary" type="button" data-view-mode="crawlDepth" title="عرض الصفحات حسب بعدها عن الصفحة الرئيسية"><i class="bi bi-distribute-vertical ms-2" aria-hidden="true"></i>عمق الزحف</button><button class="btn btn-secondary" type="button" data-view-mode="topicCluster" title="عرض الصفحات مجمعة حسب القسم"><i class="bi bi-palette-fill ms-2" aria-hidden="true"></i>المجموعات</button></div>
                 <div id="view-legend" class="p-2 my-2 rounded-2" aria-live="polite"></div>
                 <div class="d-none mt-3" id="topic-cluster-controls">
-                    <h4 class="h6">إعدادات المجموعات الموضوعية</h4><p class="text-muted small">عرّف مجموعات باستخدام التعابير النمطية (Regex). سيتم تلوين الروابط التي تطابق النمط باللون المحدد. (مثال:  /blog/  لكل مقالات المدونة)</p>
+                    <h4 class="h6">إعدادات المجموعات الموضوعية</h4>
+                    <p class="small text-muted">عرّف مجموعات باستخدام التعابير النمطية (Regex). سيتم تلوين الروابط التي تطابق النمط باللون المحدد. (مثال: `\/blog\/.*` لكل مقالات المدونة)</p>
                     <div id="cluster-rules-container"></div>
-                    <div class="d-flex gap-2 mt-2"><button class="btn btn-outline-success btn-sm" id="addClusterRuleBtn" type="button"><i class="bi bi-plus-lg ms-1"></i> إضافة قاعدة</button><button class="btn btn-primary btn-sm" id="applyClusterRulesBtn" type="button"><i class="bi bi-check-lg ms-1"></i> تطبيق</button></div>
+                    <div class="d-flex gap-2 mt-2"><button class="btn btn-sm btn-outline-success" id="addClusterRuleBtn" type="button"><i class="bi bi-plus-lg ms-1"></i> إضافة قاعدة</button><button class="btn btn-sm btn-primary" id="applyClusterRulesBtn" type="button"><i class="bi bi-check-lg ms-1"></i> تطبيق</button></div>
                 </div>
                 <hr class="my-4">
                 <h3 class="h5">أدوات التحكم بالرسم</h3>
-                <div class="d-grid gap-2 mb-2"><button class="btn btn-secondary d-none" id="toggleLabelsBtn" type="button"><i class="bi bi-chat-text ms-2"></i>إخفاء العناوين</button><button class="btn btn-outline-info d-none" id="togglePhysicsBtn" type="button"><i class="bi bi-activity ms-2"></i>إعادة تفعيل الحركة</button></div>
-                <div class="d-grid"><button class="btn btn-outline-secondary d-none" id="clusterGraphBtn" type="button"><i class="bi bi-grid-3x3-gap-fill ms-2"></i> تجميع العقد الكبيرة</button></div>
+                <div class="d-grid gap-2 mb-2">
+                    <button class="btn btn-secondary d-none" id="toggleLabelsBtn" type="button"><i class="bi bi-chat-text ms-2"></i>إخفاء العناوين</button>
+                    <button class="btn btn-outline-info d-none" id="togglePhysicsBtn" type="button"><i class="bi bi-activity ms-2"></i>إعادة تفعيل الحركة</button>
+                </div>
+                <div class="d-grid">
+                    <button class="btn btn-outline-secondary d-none" id="clusterGraphBtn" type="button"><i class="bi bi-grid-3x3-gap-fill ms-2"></i> تجميع العقد الكبيرة</button>
+                </div>
             </div>
             <div class="col-12 col-lg-6 visualizer-column position-relative">
                 <h2 class="visually-hidden">الخريطة البصرية للموقع</h2><button class="btn btn-dark btn-sm d-none position-absolute top-0 end-0 m-2" id="fullscreenBtn" style="z-index:10;" title="وضع ملء الشاشة"><i class="bi bi-arrows-fullscreen"></i></button>
@@ -171,21 +178,28 @@
             </div>
         </div>
     </main>
+
     <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:1100;">
         <div class="toast jello animated hide" role="alert" data-bs-animation="false" id="appToast" aria-live="assertive" aria-atomic="true">
             <div class="toast-header"><i id="toast-icon" class="bi rounded ms-2"></i><strong class="mx-auto" id="toast-title"></strong><button class="btn-close ms-0" type="button" data-bs-dismiss="toast" aria-label="Close"></button></div>
             <div class="toast-body" role="alert" id="toast-body"></div>
         </div>
     </div>
-    <div class="d-none" id="cluster-rule-template">
-        <div class="input-group input-group-sm mb-2 cluster-rule-item"><input class="form-control form-control cluster-regex-input" type="text" dir="ltr" placeholder="تعبير نمطي (Regex)..."><button class="btn btn-outline-danger remove-cluster-rule-btn" type="button" title="إزالة القاعدة"><i class="bi bi-trash"></i></button></div>
+    
+    <!-- Template for cluster rules -->
+    <div id="cluster-rule-template" class="d-none">
+        <div class="input-group input-group-sm mb-2 cluster-rule-item">
+            <input type="color" class="form-control-color cluster-color-input" value="#ff0000" title="اختر لون المجموعة">
+            <input type="text" class="form-control cluster-regex-input" placeholder="تعبير نمطي (Regex)..." dir="ltr">
+            <button class="btn btn-outline-danger remove-cluster-rule-btn" type="button" title="إزالة القاعدة"><i class="bi bi-trash"></i></button>
+        </div>
     </div>
+    
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/enhancements.js"></script>
     <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <script src="assets/js/site-visualizer-lab.js"></script>
-    <script src="assets/js/visualizer-worker.js"></script>
 </body>
 
 </html>
